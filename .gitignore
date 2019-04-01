@@ -94,7 +94,7 @@ venv/
 
 
 # vscode
-.vscode
+*.vscode
 
 # app's media files
-/media
+app/media
