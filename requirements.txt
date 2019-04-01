@@ -4,4 +4,5 @@ psycopg2-binary
 python-dotenv
 drf_yasg
 requests
-
+django-filter
+pillow
