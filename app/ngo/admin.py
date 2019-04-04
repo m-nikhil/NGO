@@ -60,6 +60,7 @@ class NgoDetailAdmin(admin.ModelAdmin):
         (_('Others'), {'fields': ('description', 'charityHomeType', 'amountRaised','taxCertificate')}),
     )
 
+    readonly_fields = ('name','user')
     list_display = ('name', 'city', 'needs_unverified_count')
     list_filter = ( 'city', 'charityHomeType', TaxCertificateListFilter)
     search_fields = ('name', 'city','needs_unverified_count')
@@ -101,8 +102,8 @@ class NgoImageAdmin(admin.ModelAdmin):
     model = NgoImage
     inlines = [ImagesInlineAdmin]
 
-    fields = ('name',)
-    readonly_fields = ('name',)
+    fields = ('name','user')
+    readonly_fields = ('name','user')
     list_display = ('name', 'city') 
     list_filter = ( 'city', 'charityHomeType')
     search_fields = ('name', 'city')

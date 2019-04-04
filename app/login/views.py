@@ -51,7 +51,7 @@ class RegisterViewSet(views.APIView):
 
 class UserProfileViewSet(views.APIView):
 
-    permission_classes = [SuperUserPermission | UserPermission]
+    permission_classes = [UserPermission]
 
     def get(self, request):
 

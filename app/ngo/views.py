@@ -16,21 +16,21 @@ from rest_framework.permissions import AllowAny
 
 class NgoProfileViewSet(views.APIView):
 
-    permission_classes = [SuperUserPermission | NgoPermission]
+    permission_classes = [NgoPermission]
 
     def get(self, request):
 
         ngoDetails = NgoDetail.objects.get(pk=request.user)
-        serializer = serializers.NgoDetailsSerailizer(ngoDetails)
+        serializer = serializers.NgoProfileSerailizer(ngoDetails)
         
         return Response(serializer.data)
 
-    @swagger_auto_schema(request_body=serializers.NgoDetailsSerailizer)
+    @swagger_auto_schema(request_body=serializers.NgoProfileSerailizer)
     def put(self, request, pk=None):
 
         ngoDetails = NgoDetail.objects.get(pk=request.user)
 
-        serializer = serializers.NgoDetailsSerailizer(ngoDetails,data=request.data,partial=True)
+        serializer = serializers.NgoProfileSerailizer(ngoDetails,data=request.data,partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
@@ -39,7 +39,7 @@ class NgoProfileViewSet(views.APIView):
 
 class AddNeedsViewSet(viewsets.ModelViewSet):
 
-    permission_classes = [SuperUserPermission | NgoPermission]
+    permission_classes = [NgoPermission]
     serializer_class = serializers.NeedsSerailizer
     http_method_names = ['post','put']
 

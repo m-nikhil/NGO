@@ -36,7 +36,7 @@ class CharityHomeType(models.Model):
 
 
 def user_directory_path_certificate(instance, filename):
-    return 'user_{0}/taxCertificate/{1}'.format(instance.name, uuid.uuid4())
+    return 'user_{0}/taxCertificate/{1}'.format(instance.name, str(uuid.uuid4()) + "." + (filename.split('.'))[-1] )
 
 class NgoDetail(models.Model):
 
@@ -77,7 +77,7 @@ class Needs(models.Model):
 
 
 def user_directory_path_images(instance, filename):
-    return 'user_{0}/images/{1}'.format(instance.ngo.name, uuid.uuid4())
+    return 'user_{0}/images/{1}'.format(instance.ngo.name, str(uuid.uuid4()) + "." + (filename.split('.'))[-1] )
 
 class Images(models.Model):
     id = models.AutoField(primary_key=True)

@@ -7,11 +7,17 @@ from .models import CustomUser, UserProfile, Ngo, Staff
 from ngo.admin import NgoDetailInlineAdmin
 from django.db.models import Q
 from django.contrib.auth.models import Group
+from .forms import RequiredInlineFormSet
 
 
 
 class UserProfileInlineAdmin(admin.StackedInline):
     model = UserProfile
+    formset = RequiredInlineFormSet
+    can_delete = False
+    
+
+    
 
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
