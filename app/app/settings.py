@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+    'django.contrib.gis',
+    'mapwidgets',
     'drf_yasg',
     'django_filters',
     'login',
@@ -82,7 +84,7 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'ngo',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
@@ -171,5 +173,16 @@ SWAGGER_SETTINGS = {
 AUTH_USER_MODEL = 'login.CustomUser'
 
 LOGIN_URL = '/auth/login'
+
+# admin point map
+MAP_WIDGETS = {
+    "GooglePointFieldWidget": (
+        ("zoom", 15),
+        ("mapCenterLocationName", "london"),
+        ("GooglePlaceAutocompleteOptions", {'componentRestrictions': {'country': 'uk'}}),
+        ("markerFitZoom", 12),
+    ),
+    "GOOGLE_MAP_API_KEY": "AIzaSyAxrJUaNnhyqGf6FwnuWwvHDujv4R1GDVU"
+}
 
 

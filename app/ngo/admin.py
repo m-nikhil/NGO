@@ -4,6 +4,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.html import format_html
 from .forms import RequiredInlineFormSet
 from django.db.models import Q
+from mapwidgets.widgets import GooglePointFieldWidget
+from django.contrib.gis.db import models
 
 class NeedsInlineAdmin(admin.TabularInline):
     model = Needs
@@ -47,6 +49,10 @@ class TaxCertificateListFilter(admin.SimpleListFilter):
 
 
 class NgoDetailAdmin(admin.ModelAdmin):
+
+    formfield_overrides = {
+        models.PointField: {"widget": GooglePointFieldWidget}
+    }
 
     def has_add_permission(self, request, obj=None):
         return False

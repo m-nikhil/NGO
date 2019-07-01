@@ -1,4 +1,4 @@
-from django.db import models
+from django.contrib.gis.db import models
 from django.contrib.postgres.fields import ArrayField
 from login.models import CustomUser
 
@@ -49,7 +49,7 @@ class NgoDetail(models.Model):
     name = models.CharField(max_length=20,unique=True)
     address = models.TextField(null=True,blank=True)
     city =  models.OneToOneField(City,on_delete=models.DO_NOTHING,null=True,blank=True)
-    mapLocation = ArrayField(models.TextField(),size=2,null=True,blank=True)
+    mapLocation =  models.PointField(null=True,blank=True)
     description = models.TextField(null=True,blank=True,max_length=1000)
     contactNumber = models.CharField(null=True,blank=True,max_length=20)
     charityHomeType = models.OneToOneField(CharityHomeType,on_delete=models.DO_NOTHING,null=True,blank=True)

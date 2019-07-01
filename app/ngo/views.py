@@ -60,4 +60,16 @@ class NgoViewSet(viewsets.ModelViewSet):
     filterset_class = filters.NgoFilter
     filter_backends = (django_filters.DjangoFilterBackend,)
 
+ class CityViewSet(viewsets.ModelViewSet):
+    permission_classes = [AllowAny]
+    serializer_class = serializers.CitySerializer
+    http_method_names = ['get']
+    queryset = City.objects.all()
+
+class CharityHomeTypeViewSet(viewsets.ModelViewSet):
+    permission_classes = [AllowAny]
+    serializer_class = serializers.CharityHomeTypeSerailizer
+    http_method_names = ['get']
+    queryset = CharityHomeType.objects.all()   
+
 

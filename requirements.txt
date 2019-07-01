@@ -6,3 +6,4 @@ drf_yasg
 requests
 django-filter
 pillow
+django-map-widgets

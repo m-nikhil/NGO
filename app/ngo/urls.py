@@ -4,6 +4,8 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register('ngo', views.NgoViewSet)
+router.register('city', views.CityViewSet)
+router.register('hometype', views.CharityHomeTypeViewSet)
 router.register('profile/ngo/needs', views.AddNeedsViewSet, basename = "needs")
 
 urlpatterns = [ 

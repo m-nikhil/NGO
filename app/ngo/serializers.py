@@ -8,7 +8,7 @@ class VerifiedNeedsListSerializer(serializers.ListSerializer):
         return super(VerifiedNeedsListSerializer, self).to_representation(data)
 
 
-class NeedsSerailizer(serializers.ModelSerializer):
+class NeedsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Needs
@@ -32,7 +32,7 @@ class NeedsSerailizer(serializers.ModelSerializer):
 
 
 
-class NgoDetailsInlineNeedsSerailizer(serializers.ModelSerializer):
+class NgoDetailsInlineNeedsSerializers(serializers.ModelSerializer):
 
     class Meta:
         list_serializer_class = VerifiedNeedsListSerializer
@@ -40,7 +40,7 @@ class NgoDetailsInlineNeedsSerailizer(serializers.ModelSerializer):
         fields = ('id','status','requirement')
         read_only_fields = ('id','status','requirement')
 
-class NgoDetailsInlineImageSerailizer(serializers.ModelSerializer):
+class NgoDetailsInlineImageSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = Images
@@ -48,13 +48,13 @@ class NgoDetailsInlineImageSerailizer(serializers.ModelSerializer):
         read_only_fields = ('id','image')
 
 
-class NgoDetailsSerailizer(serializers.ModelSerializer):
+class NgoDetailsSerializers(serializers.ModelSerializer):
 
     contactNumber = serializers.RegexField("[0-9]+",max_length=10,min_length=10)
     email = serializers.CharField(source="user.email", read_only=True)
     id = serializers.CharField(source="user.id", read_only=True)
-    needs = NgoDetailsInlineNeedsSerailizer(read_only=True,many=True)
-    images = NgoDetailsInlineImageSerailizer(read_only=True,many=True)
+    needs = NgoDetailsInlineNeedsSerializer(read_only=True,many=True)
+    images = NgoDetailsInlineImageSerializer(read_only=True,many=True)
     city = serializers.CharField(source="city.city", read_only=True)
     charityHomeType = serializers.CharField(source="charityHomeType.charityHomeType", read_only=True)
 
@@ -64,14 +64,14 @@ class NgoDetailsSerailizer(serializers.ModelSerializer):
         read_only_fields = ('email','id','name','needs','amountRaised','images')
 
 
-class NgoProfileSerailizer(serializers.ModelSerializer):
+class NgoProfileSerializers(serializers.ModelSerializer):
 
     contactNumber = serializers.RegexField("[0-9]+",max_length=10,min_length=10)
     email = serializers.CharField(source="user.email", read_only=True)
     city = serializers.CharField(source="city.city", read_only=True)
     charityHomeType = serializers.CharField(source="charityHomeType.charityHomeType", read_only=True)
     id = serializers.CharField(source="user.id", read_only=True)
-    needs = NeedsSerailizer(read_only=True,many=True)
+    needs = NeedsSerializer(read_only=True,many=True)
 
     def update(self, instance, validated_data):
         for key, value in validated_data.items():
@@ -85,6 +85,19 @@ class NgoProfileSerailizer(serializers.ModelSerializer):
         read_only_fields = ('email','id','name','needs','amountRaised')
 
 
+
+class CitySerializer(serializers.ModelSerailizer):
+    class Meta:
+        model = City
+        fields = ('id','city')
+        read_only_fields = ('id')
+
+
+class CharityHomeTypeSerializer(serializers.ModelSerailizer):
+    class Meta:
+        model = CharityHomeType
+        fields = ('id','charityHomeType')
+        read_only_fields = ('id')
 
 
 
