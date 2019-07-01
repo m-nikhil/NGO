@@ -186,3 +186,4 @@ MAP_WIDGETS = {
 }
 
 
+GEOIP_PATH = os.path.join(BASE_DIR, "geoIP2_DB")
