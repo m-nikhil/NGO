@@ -2,7 +2,7 @@ from django_filters import rest_framework as filters
 from .models import NgoDetail
 from django.db.models import Q
 from django.contrib.gis.geos import Point
-from django.contrib.gis.measure import Distance
+from django.contrib.gis.measure import Distance, D
 
 
 
@@ -14,8 +14,10 @@ def taxCertificate_not_empty(queryset, name, value):
         return queryset.filter(Q(taxCertificate__isnull=True) | Q(taxCertificate__exact=''))
 
 def radius_filter(queryset, name, value):
-        
-    return queryset.filter(mapLocation__dwithin=(someLocation, D(km=value)))
+    lat = 80.2209792
+    lng = 13.0924544
+    point = Point(lng, lat)   
+    return queryset.filter(mapLocation__distance_lt=(point, Distance(km=value)))
     
 
 class NgoFilter(filters.FilterSet):
@@ -28,7 +30,7 @@ class NgoFilter(filters.FilterSet):
     typeOfCharityHome = filters.CharFilter(field_name="charityHomeType__charityHomeType",lookup_expr='icontains')
     address = filters.CharFilter(lookup_expr='icontains')
     taxCertificate_boolean = filters.BooleanFilter( method=taxCertificate_not_empty)
-    raduis =  filters.NumberFilter( method=radius_filter )
+    radius =  filters.NumberFilter( method=radius_filter )
 
 
 

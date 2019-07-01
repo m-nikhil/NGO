@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import NgoDetail, Needs, Images
+from .models import NgoDetail, Needs, Images, City, CharityHomeType
 
 class VerifiedNeedsListSerializer(serializers.ListSerializer):
 
@@ -32,7 +32,7 @@ class NeedsSerializer(serializers.ModelSerializer):
 
 
 
-class NgoDetailsInlineNeedsSerializers(serializers.ModelSerializer):
+class NgoDetailsInlineNeedsSerializer(serializers.ModelSerializer):
 
     class Meta:
         list_serializer_class = VerifiedNeedsListSerializer
@@ -40,7 +40,7 @@ class NgoDetailsInlineNeedsSerializers(serializers.ModelSerializer):
         fields = ('id','status','requirement')
         read_only_fields = ('id','status','requirement')
 
-class NgoDetailsInlineImageSerializers(serializers.ModelSerializer):
+class NgoDetailsInlineImageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Images
@@ -48,7 +48,7 @@ class NgoDetailsInlineImageSerializers(serializers.ModelSerializer):
         read_only_fields = ('id','image')
 
 
-class NgoDetailsSerializers(serializers.ModelSerializer):
+class NgoDetailsSerializer(serializers.ModelSerializer):
 
     contactNumber = serializers.RegexField("[0-9]+",max_length=10,min_length=10)
     email = serializers.CharField(source="user.email", read_only=True)
@@ -64,7 +64,7 @@ class NgoDetailsSerializers(serializers.ModelSerializer):
         read_only_fields = ('email','id','name','needs','amountRaised','images')
 
 
-class NgoProfileSerializers(serializers.ModelSerializer):
+class NgoProfileSerializer(serializers.ModelSerializer):
 
     contactNumber = serializers.RegexField("[0-9]+",max_length=10,min_length=10)
     email = serializers.CharField(source="user.email", read_only=True)
@@ -86,18 +86,18 @@ class NgoProfileSerializers(serializers.ModelSerializer):
 
 
 
-class CitySerializer(serializers.ModelSerailizer):
+class CitySerializer(serializers.ModelSerializer):
     class Meta:
         model = City
         fields = ('id','city')
-        read_only_fields = ('id')
+        read_only_fields = ('id',)
 
 
-class CharityHomeTypeSerializer(serializers.ModelSerailizer):
+class CharityHomeTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = CharityHomeType
         fields = ('id','charityHomeType')
-        read_only_fields = ('id')
+        read_only_fields = ('id',)
 
 
 
